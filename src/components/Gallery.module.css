@@ -1,0 +1,224 @@
+.section {
+  padding: var(--space-8) 0;
+  background: var(--color-bg);
+}
+
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--space-7);
+}
+
+.label {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-2);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-2);
+}
+
+.desc {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+.grid {
+  columns: 4;
+  column-gap: 12px;
+}
+
+.item {
+  display: block;
+  width: 100%;
+  break-inside: avoid;
+  margin-bottom: 12px;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  background: var(--color-surface);
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  border: none;
+  padding: 0;
+}
+
+.item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.item:nth-child(3n + 1) { transition-delay: 0.05s; }
+.item:nth-child(3n + 2) { transition-delay: 0.12s; }
+.item:nth-child(3n + 3) { transition-delay: 0.19s; }
+
+.item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.item:hover img {
+  transform: scale(1.03);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.item:hover .overlay {
+  opacity: 1;
+}
+
+.empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  padding: var(--space-7) 0;
+}
+
+.empty code {
+  font-family: var(--font-mono);
+  color: var(--color-accent);
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightboxContent {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.lightboxContent img {
+  max-width: 100%;
+  max-height: 80vh;
+  width: auto;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+}
+
+.lightboxCaption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+  text-align: center;
+}
+
+.lightboxClose {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  color: var(--color-text-secondary);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+  z-index: 201;
+}
+
+.lightboxClose:hover {
+  color: var(--color-text-primary);
+}
+
+.lightboxNav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-secondary);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  z-index: 201;
+}
+
+.lightboxNav:hover {
+  color: var(--color-text-primary);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.lightboxPrev { left: var(--space-3); }
+.lightboxNext { right: var(--space-3); }
+
+.lightboxCounter {
+  position: absolute;
+  bottom: var(--space-3);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Responsive grid */
+@media (max-width: 1200px) {
+  .grid {
+    columns: 3;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    columns: 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    columns: 2;
+    column-gap: 8px;
+  }
+
+  .item {
+    margin-bottom: 8px;
+  }
+}
